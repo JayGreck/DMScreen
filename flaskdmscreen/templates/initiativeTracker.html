@@ -1,0 +1,172 @@
+{% extends "layout.html"%}
+
+{% block content %}
+    {% if title %}
+            <title>{{title}}</title>
+            {% else %}
+            <title>DM Screen</title>
+    {% endif %}
+
+          
+          
+          <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Initiative</div>
+                <div class="list-group list-group-flush">
+                  <form method="POST" action="" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-danger") }}
+                    </div>
+                    
+                </form>
+                <!-- <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalLong">
+                  Add Player
+                </button> -->
+                  {% for score, name in statblock_name_list %}
+                  <div class="float-right">
+                      <span class="glyphicon glyphicon-file">
+                          <ol class="list-group clearfix">
+                              <li class="list-group-item">{{ score, name }}</li>
+                          </ol>
+                      </span>
+                  </div>
+                {% endfor %}
+                </div>
+            </div>
+
+          <div class="container">
+            <span class="border border-primary">
+                <div class="row p-5">
+
+                  <!-- The Close Button -->
+                  
+                  
+                  {% for modifier, image in image_file %}
+
+
+                 
+                    
+                    <div class="card" style="width: 20rem;">
+                      <img src="{{ url_for('static', filename=image) }}" class="card-img-top"  id="{{image}}" alt="...">
+                        
+                    </div>
+                  
+                     <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                    <!-- The Close Button -->
+                    <span class="close">&times;</span>
+
+                    <!-- Modal Content (The Image) -->
+                    <img class="modal-content" id="img01">
+
+                  
+                  </div>
+
+
+                  <script>
+                    // Get the modal
+                    var modal = document.getElementById("myModal");
+        
+                    // Get the image and insert it inside the modal - use its "alt" text as a caption
+                    var img = document.getElementById("{{image}}");
+                    var modalImg = document.getElementById("img01");
+                    var captionText = document.getElementById("caption");
+                    img.onclick = function(){
+                      modal.style.display = "block";
+                      modalImg.src = this.src;
+                      captionText.innerHTML = this.alt;
+                    }
+        
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+        
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function() {
+                      modal.style.display = "none";
+                    }
+        
+        
+                  </script>
+                    
+                  {% endfor %}
+
+                  
+                <!-- Modal -->
+                <!-- Button trigger modal -->
+
+
+             
+
+
+                 
+    
+    
+    
+                  
+                  </div>
+                </span>
+
+
+
+
+
+          </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="false">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add Player Initiative</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                      {{ add_player_form.hidden_tag() }}
+                      <fieldset class="form-group">
+                          
+                          
+                          <div class="form-group">
+                            {{ add_player_form.player_name(class="form-control item form-control-lg") }}
+                                 
+                          </div>
+                          
+                          <div class="form-group">
+                              
+                              {% if add_player_form.player_initiative_score.errors %}
+                                  {{ add_player_form.player_initiative_score(class="form-control item form-control-lg is-invalid") }}
+                                  <div class="invalid-feeback">
+                                      {% for errors in player_initiative_score.player_name.errors %}
+                                          <span>{{ error }} </span>
+                                      {% endfor %}
+                                  </div>
+                              {% else %}
+                                  {{ add_player_form.player_initiative_score(class="form-control item form-control-lg") }}
+                              {% endif %}
+                          </div>
+                         
+          
+                      </fieldset>
+                      
+                      <div class="form-group">
+                          {{ add_player_form.submit(class="btn btn-outline-danger") }}
+                      </div>
+                      
+                  </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+             
+          
+{% endblock %}

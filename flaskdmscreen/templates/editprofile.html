@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Easiest Way to Add Input Masks to Your Forms</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+</head>
+<body>
+    <div class="registration-form">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <div class="form-icon">
+                    <span><img src="{{ image_file }}" alt="Image could not load" width="130"></span>
+                </div>
+                
+                <div class="form-group">
+                    
+                    
+    
+                        {% if form.username.errors %}
+                            {{ form.username(class="form-control item form-control-lg is-invalid") }}
+                            <div class="invalid-feeback">
+                                {% for errors in form.username.errors %}
+                                    <span>{{ error }} </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username(class="form-control item form-control-lg") }}
+                        {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control item form-control-lg is-invalid") }}
+                        <div class="invalid-feeback">
+                            {% for errors in form.email.errors %}
+                                <span>{{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control item form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+
+            </fieldset>
+            
+            <div class="form-group">
+                {{ form.submit(class="btn btn-block create-account") }}
+            </div>
+            
+        </form>
+        <div class="social-media">
+
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+   
+</body>
+</html>
+
+{% endblock %}

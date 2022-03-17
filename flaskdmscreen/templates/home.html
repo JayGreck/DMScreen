@@ -6,64 +6,61 @@
             {% else %}
             <title>DM Screen</title>
     {% endif %}
-    <h1>DM Screen</h1>
-
+           
           <span class="border border-primary">
-            <div class="row p-3">
-              <div class="card" style="width: 20rem;">
-                <img src="{{url_for('static', filename='images/statblock.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  
-                  <a href="#" class="btn btn-danger">Add to Combat</a>
-                </div>
-              </div>
-  
-              <div class="card" style="width: 20rem;">
-                <img src="{{url_for('static', filename='images/statblock.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  
-                  <a href="#" class="btn btn-danger">Add to Combat</a>
-                </div>
-              </div>
+            <div class="row p-5">
 
-              <div class="card" style="width: 20rem;">
-                <img src="{{url_for('static', filename='images/statblock.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  
-                  <a href="#" class="btn btn-danger">Add to Combat</a>
-                </div>
-              </div>
-
-              <div class="card" style="width: 20rem;">
-                <img src="{{url_for('static', filename='images/statblock.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  
-                  <a href="#" class="btn btn-danger">Add to Combat</a>
-                </div>
-              </div>
-              <div class="card" style="width: 20rem;">
-                {% if filename %}
-
-                  <img src="{{url_for('display_image', filename=filename)}}" class="card-img-top" alt="...">
-
-                {% endif %}
-                <div class="card-body">
-                  
-                  <a href="#" class="btn btn-danger">Add to Combat</a>
-                </div>
-              </div>
-
-              <form method="POST" action="/upload" enctype="multipart/form-data">
-                <div class="form-group">
-                  <div class="card text-center" style="width: 18rem;">
-                    <div class="card-body">
-                      <label for="inputFile">File Input</label>
-                      <input type="file" class="form-control-file"  name="inputFile">
-                      <button type="submit" class="btn btn-outline-danger">+</button>
-                    </div>
+              
+              
+              
+              {% for key, form in image_file.items() %}
+                
+                <div class="card" style="width: 20rem;">
+                  <img src="{{ url_for('static', filename='statblocks/' + key) }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    
+                      <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                          <fieldset>
+                            <!--<a href="#" class="btn btn-danger">Add to Combat</a> -->
+                            <div class="form-check">
+                              {{ form.in_combat(type="checkbox", class="btn-check", id=form, autocomplete="off") }}
+                              {{ form.in_combat.label(class="btn btn-danger", for=form) }}
+                            </div>
+                        </fieldset>
+                        <div class="form-group mx-sm-3 mb-2">
+                          {{ form.submit(class="btn btn-outline-danger") }}
+                        </div>
+                      </form>
+                      
+                    
                   </div>
+                    
                 </div>
-              </form>
+              
+                
+                
+              {% endfor %}
+
+              <fieldset>
+                <form method="POST" action="" enctype="multipart/form-data">
+                  {{ upload_statblock_form.hidden_tag() }}
+                  <div class="form-group">
+                    <div class="card text-center" style="width: 18rem;">
+                      <div class="card-body">
+                        {{ upload_statblock_form.statblock.label() }}
+                        {{ upload_statblock_form.statblock(class="form-control-file") }}
+                        {% if upload_statblock_form.statblock.errors %}
+                            {% for error in upload_statblock_form.statblock.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                  <div class="form-group">
+                    {{ upload_statblock_form.submit(class="btn btn-outline-info") }}
+                  </div>
+                </form>
+              </fieldset>
+
               
               </div>
 {% endblock %}

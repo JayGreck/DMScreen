@@ -1,6 +1,23 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content-section">
+  
+   
+
+
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Easiest Way to Add Input Masks to Your Forms</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+</head>
+<body>
+    <div class="registration-form">
         <form method="POST", action="" >
             {{ form.hidden_tag() }}
             <fieldset class="form-group mx-sm-3 mb-2">
@@ -33,25 +50,38 @@
                     {% endif %}
                 </div>
 
-                <div class="form-check">
+                <!-- <div class="form-check">
                     {{ form.remember(class="form-check-input") }}
                     {{ form.remember.label(class="form-check-label") }}
-                </div>
+                </div> -->
                 
+
             </fieldset>
             <div class="form-group mx-sm-3 mb-2">
-                {{ form.submit(class="btn btn-outline-info") }}
+                {{ form.submit(class="btn btn-block create-account") }}
             </div>
-            <small class="text-muted ml-2">
-                <a href="#">Forgotten Password</a>
+            <small class="text-muted">
+                Don't have an Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up</a>
             </small>
+             </div>
+
+
 
         </form>
 
+        <div class="social-media">
+            
+            <!-- <h5>Sign up with social media</h5>
+            <div class="social-icons">
+                <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
+                <a href="#"><i class="icon-social-google" title="Google"></i></a>
+                <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
+            </div> -->
+        </div>
     </div>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Don't have an Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up</a>
-        </small>
-    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <!-- <script src="assets/js/script.js"></script> -->
+</body>
+</html>
 {% endblock %}
