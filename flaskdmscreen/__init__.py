@@ -1,14 +1,12 @@
 from flask import Flask
-from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
-#from models import Statblock
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
 
 
 app = Flask(__name__, template_folder='templates')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///statblock.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///website_data.db'
 app.config['SECRET_KEY'] = '28f621d1db1fee74cef4bc6cc0dce5f4'
 # Initialize database
 db = SQLAlchemy(app)
